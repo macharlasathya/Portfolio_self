@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-blue: #1e56a0;
+  --secondary-blue: #163172;
+  --light-blue: #d6e4f0;
+  --accent-blue: #3a86ff;
+  --dark-blue: #0f1e40;
+  --white: #ffffff;
+  --off-white: #f8f9fa;
+  --light-gray: #e9ecef;
+  --gray: #6c757d;
+  --dark-gray: #343a40;
+  --shadow-light: 0 4px 12px rgba(30, 86, 160, 0.1);
+  --shadow-medium: 0 6px 16px rgba(30, 86, 160, 0.18);
+  --shadow-dark: 0 8px 24px rgba(30, 86, 160, 0.25);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Main navbar styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-light);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-normal);
+  height: 80px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4%;
+  height: 100%;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  letter-spacing: 0.5px;
+  transition: color var(--transition-fast);
+}
+
+.logo-text:hover {
+  color: var(--accent-blue);
+}
+
+/* Navigation links container */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  height: 100%;
+  padding: 9px;
+  border-radius: 20px;
+}
+
+/* Individual navigation link styling */
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dark-gray);
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--primary-blue);
+}
+
+/* Animated underline effect for nav links */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-blue);
+  transition: width var(--transition-normal);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 100%;
+  background-color: var(--primary-blue);
+}
+
+/* Contact button styling */
+.contact-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: var(--white);
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  transition: all var(--transition-normal);
+  font-weight: 500;
+  box-shadow: var(--shadow-light);
+  border: none;
+  margin-left: 1rem;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+  background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+  color: var(--white);
+}
+
+.contact-btn::after {
+  display: none;
+}
+
+.active-btn {
+  background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+}
+
+/* Hide the menu button by default */
+.menu-button {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0.5rem;
+}
+
+/* Hamburger icon styling */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dark-gray);
+  border-radius: 4px;
+  transition: all var(--transition-normal);
+}
+
+/* Hamburger animation for open state */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: var(--primary-blue);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: var(--primary-blue);
+}
+
+/* Scroll effect - navbar gets smaller and changes background on scroll */
+.navbar.scrolled {
+  height: 65px;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Responsive design - Mobile menu */
+@media screen and (max-width: 992px) {
+  .navbar-container {
+    padding: 0 5%;
+  }
+  
+  .navbar-links {
+    gap: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    height: 70px;
+  }
+  
+  .navbar.scrolled {
+    height: 60px;
+  }
+  
+  .menu-button {
+    display: block;
+  }
+  
+  .navbar-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-medium);
+    padding: 2rem 0;
+    gap: 1.5rem;
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition-normal);
+    z-index: 999;
+    align-items: center;
+    height: auto;
+  }
+  
+  .navbar.scrolled .navbar-links {
+    top: 60px;
+  }
+  
+  .navbar-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .contact-btn {
+    margin: 0.5rem 0 0 0;
+    width: 80%;
+    text-align: center;
+    padding: 0.7rem 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .navbar-container {
+    padding: 0 4%;
+  }
+  
+  .logo-text {
+    font-size: 1.4rem;
+  }
+  
+  .navbar-links {
+    padding: 1.5rem 0;
+  }
+  
+  .contact-btn {
+    width: 85%;
+  }
+}
+
+/* Dark mode styling */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-blue: #4dabf7;
+    --secondary-blue: #339af0;
+    --accent-blue: #74c0fc;
+    --white: #f8f9fa;
+    --off-white: #343a40;
+    --light-gray: #495057;
+    --gray: #adb5bd;
+    --dark-gray: #e9ecef;
+  }
+  
+  .navbar {
+    background-color: rgba(33, 37, 41, 0.95);
+  }
+  
+  .navbar.scrolled {
+    background-color: rgba(25, 28, 31, 0.98);
+  }
+  
+  .hamburger span {
+    background-color: var(--light-gray);
+  }
+  
+  .navbar-links {
+    background-color: rgba(33, 37, 41, 0.98);
+  }
+  
+  .navbar-links.active {
+    background-color: rgba(33, 37, 41, 0.98);
+  }
+}

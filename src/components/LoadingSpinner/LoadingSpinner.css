@@ -1,0 +1,53 @@
+/* src/Components/LoadingSpinner/LoadingSpinner.css */
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.spinner-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.spinner-outer {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border: 4px solid #e6f7ff; /* Light blue */
+  border-top: 4px solid #1890ff; /* Blue */
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.spinner-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  border: 4px solid #f0f8ff; /* Lighter blue */
+  border-top: 4px solid #40a9ff; /* Medium blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite reverse;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,160 @@
+/* ScrollToTop.css - Professional styling for scroll to top button */
+
+:root {
+  --primary: #4a6cf7;
+  --primary-dark: #3a5bd9;
+  --primary-light: #6b89f9;
+  --white: #ffffff;
+  --button-size: 3rem;
+  --icon-size: 1.25rem;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-primary: 0 8px 16px -2px rgba(74, 108, 247, 0.25);
+}
+
+/* Base Button Styling */
+.scroll-to-top-button {
+  position: fixed;
+  bottom: -4.5rem; /* Start below viewport */
+  right: 1.5rem;
+  height: var(--button-size);
+  width: var(--button-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  box-shadow: var(--shadow-primary);
+  transform: scale(0.95);
+  transition: 
+    bottom 0.5s var(--transition-smooth),
+    opacity 0.5s var(--transition-smooth),
+    transform 0.3s var(--transition-fast),
+    background-color 0.3s var(--transition-fast),
+    box-shadow 0.3s var(--transition-fast);
+  overflow: hidden;
+}
+
+/* Button Visibility State */
+.scroll-to-top-button.visible {
+  bottom: 1.5rem;
+  opacity: 1;
+}
+
+/* Icon Wrapper */
+.scroll-to-top-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Button Icon */
+.scroll-to-top-icon {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  stroke: currentColor;
+  transition: transform 0.3s var(--transition-fast);
+}
+
+/* Hover Effects */
+.scroll-to-top-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px) scale(1);
+  box-shadow: var(--shadow-lg), 0 0 0 5px rgba(74, 108, 247, 0.1);
+}
+
+.scroll-to-top-button:hover .scroll-to-top-icon {
+  transform: translateY(-2px);
+}
+
+/* Active State */
+.scroll-to-top-button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: var(--shadow-md);
+}
+
+/* Animation on Click */
+.scroll-to-top-button.animating .scroll-to-top-icon {
+  animation: iconPulse 0.5s ease-out;
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Focus State for Accessibility */
+.scroll-to-top-button:focus {
+  box-shadow: var(--shadow-md), 0 0 0 3px rgba(74, 108, 247, 0.4);
+  outline: none;
+}
+
+/* Before Pseudo-element for Animation */
+.scroll-to-top-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.scroll-to-top-button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --button-size: 2.75rem;
+    --icon-size: 1.125rem;
+  }
+  
+  .scroll-to-top-button.visible {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --button-size: 2.5rem;
+    --icon-size: 1rem;
+  }
+  
+  .scroll-to-top-button.visible {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Print Media Query - Hide Button when Printing */
+@media print {
+  .scroll-to-top-button {
+    display: none !important;
+  }
+}
